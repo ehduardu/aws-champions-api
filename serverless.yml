@@ -1,0 +1,25 @@
+service: aws-champions
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  # iamRoleStatements:
+  #   - Effect: "Allow"
+  #     Action:
+  #       - "s3:PutObject"
+  #     Resource:
+  #       - "arn:aws:s3:::${env:BUCKET_NAME}/*"
+
+
+functions:
+  api:
+    handler: src/handler.handler
+    events:
+      - httpApi: '*'
+      
+
+plugins:
+  - serverless-offline 
+  - serverless-dotenv-plugin
